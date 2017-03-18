@@ -418,8 +418,11 @@ class Robot
 
     express = require 'express'
     multipart = require 'connect-multiparty'
+    enforce = require('express-sslify')
 
     app = express()
+
+    app.use enforce.HTTPS(trustProtoHeader: true)
 
     app.use (req, res, next) =>
       res.setHeader "X-Powered-By", "hubot/#{@name}"
